@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      containers:
+      - name: server
+        image: brari0/mern-backend:latest   # Correct image name
+        ports:
+        - containerPort: 5000
+        env:
+        - name: MONGO_URI
+          value: "mongodb://mongodb-service:27017/MyApp"  # MongoDB service and database name
+        - name: PORT
+          value: "5000"
