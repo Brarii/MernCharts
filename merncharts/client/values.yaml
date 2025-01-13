@@ -1,0 +1,19 @@
+replicaCount : 3
+image :
+repository : brari0/mern-frontend
+tag : latest
+pullPolicy : IfNotPresent
+service :
+type : ClusterIP
+port : 3000
+env :
+- name : REACT_APP_API_URL
+value : http://backend:5000
+ingress :
+enabled : true
+annotations : {}
+hosts :
+- host : localhost
+paths :
+- path : /
+tls : []

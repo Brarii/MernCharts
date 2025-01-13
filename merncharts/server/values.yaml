@@ -1,0 +1,15 @@
+replicaCount : 3
+image :
+repository : brari0/mern-backend
+tag : latest
+pullPolicy : IfNotPresent
+service :
+type : ClusterIP
+port : 5000
+env :
+- name : MONGO_URI
+value : mongodb://mongodb:27017/MyApp
+- name : PORT
+value : "5000"
+ingress :
+enabled : false
