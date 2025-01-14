@@ -3,43 +3,43 @@ version: '3.8'
 services:
   backend:
     build:
-      context: .  # Context is the root directory for the backend
-      dockerfile: backend/Dockerfile  # Dockerfile inside the backend folder
+      context: . 
+      dockerfile: backend/Dockerfile  
     ports:
-      - "5000:5000"  # Expose backend on port 5000
+      - "5000:5000"  
     env_file:
-      - backend/.env  # Ensure this path points correctly to the backend .env
+      - backend/.env  
     networks:
       - app-network
     depends_on:
-      - mongodb  # Wait for MongoDB to start before backend
+      - mongodb  
 
   frontend:
     build:
-      context: ./frontend  # Set context to the frontend folder for frontend build
-      dockerfile: Dockerfile  # Dockerfile should be inside the frontend folder
+      context: ./frontend  
+      dockerfile: Dockerfile  
     ports:
-      - "3000:3000"  # Expose frontend on port 3000
+      - "3000:3000"  
     environment:
-      - REACT_APP_API_URL=http://backend:5000  # Correct API URL for Docker networking
+      - REACT_APP_API_URL=http://backend:5000  
     networks:
       - app-network
     depends_on:
-      - backend  # Ensure backend starts before frontend
+      - backend  
 
   mongodb:
-    image: mongo:latest  # Official MongoDB image
+    image: mongo:latest  
     container_name: mongo
     ports:
-      - "27017:27017"  # Expose MongoDB on port 27017
+      - "27017:27017"  
     volumes:
-      - mongo_data:/data/db  # Persist MongoDB data
+      - mongo_data:/data/db  
     networks:
       - app-network
 
 volumes:
-  mongo_data:  # Docker volume for MongoDB data
+  mongo_data:  
 
 networks:
   app-network:
-    driver: bridge  # Use a custom bridge network for inter-service communication
+    driver: bridge  

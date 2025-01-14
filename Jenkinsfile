@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerID') // Add Docker Hub credentials in Jenkins
+        DOCKERHUB_CREDENTIALS = credentials('dockerID') 
         IMAGE_NAME_FRONTEND = 'brari0/mernproj-frontend'
         IMAGE_NAME_BACKEND = 'brari0/mernproj-backend'
     }
